@@ -108,26 +108,26 @@ fun LocationResults(locationList: Result<List<Location>>?) {
     }
 }
 
-@Composable
-fun LocationItem(
-    location: Location
-) {
-    Card(modifier = Modifier.padding(18.dp).fillMaxWidth().height(100.dp)) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-        ) {
-            val fullName = "${location.country} ${location.adm2} ${location.name}"
-            Text(
-                text = location.name
-            )
-            Text(
-                text = fullName
-            )
-        }
-    }
-}
+// @Composable
+// fun LocationItem(
+//     location: Location
+// ) {
+//     Card(modifier = Modifier.padding(18.dp).fillMaxWidth().height(100.dp)) {
+//         Column(
+//             modifier = Modifier
+//                 .fillMaxWidth()
+//                 .wrapContentHeight()
+//         ) {
+//             val fullName = "${location.country} ${location.adm2} ${location.name}"
+//             Text(
+//                 text = location.name
+//             )
+//             Text(
+//                 text = fullName
+//             )
+//         }
+//     }
+// }
 
 @Preview(showBackground = true)
 @Composable
