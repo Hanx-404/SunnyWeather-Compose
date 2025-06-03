@@ -46,7 +46,7 @@ fun Indices(indices: List<IndicesDaily>) {
                     .wrapContentSize()
                     .padding(start = 15.dp, top = 15.dp, bottom = 15.dp)
             )
-            // 2：洗车指数，3：穿衣指数，5：紫外线指数，6：感冒指数
+            // 0：洗车指数，1：穿衣指数，2：紫外线指数，3：感冒指数
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -107,10 +107,10 @@ fun IndicesItem(indicesDaily: IndicesDaily, modifier: Modifier = Modifier) {
 @Composable
 fun IndicesPreview() {
     val indices = listOf(
-        IndicesDaily("2023-05-01", "2", "洗车", "一般"),
-        IndicesDaily("2023-05-01", "3", "穿衣", "较冷"),
-        IndicesDaily("2023-05-01", "5", "紫外线", "弱"),
-        IndicesDaily("2023-05-01", "6", "感冒", "无")
+        IndicesDaily("2023-05-01", "2", "洗车指数", "一般"),
+        IndicesDaily("2023-05-01", "3", "穿衣指数", "较冷"),
+        IndicesDaily("2023-05-01", "5", "紫外线指数", "弱"),
+        IndicesDaily("2023-05-01", "9", "感冒指数", "无")
     )
     Indices(indices)
 }

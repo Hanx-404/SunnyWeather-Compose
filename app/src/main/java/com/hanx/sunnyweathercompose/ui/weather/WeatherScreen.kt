@@ -1,12 +1,12 @@
 package com.hanx.sunnyweathercompose.ui.weather
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -14,13 +14,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.hanx.sunnyweathercompose.logic.model.Daily
 import com.hanx.sunnyweathercompose.logic.model.IndicesDaily
 import com.hanx.sunnyweathercompose.logic.model.Now
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
 @Composable
-fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()) {
+fun WeatherScreen(locationId: String? = null, locationName: String = "城市名", navController: NavController? = null, weatherViewModel: WeatherViewModel = viewModel()) {
+    locationId?.let {
+        weatherViewModel.refreshWeather(it)
+    }
+
     val _weatherLiveData = weatherViewModel.weatherLiveData.observeAsState()
     val weatherLiveData by remember { _weatherLiveData }
 
@@ -32,11 +37,16 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
     ) {
-        NowWeather(nowWeather!!)
-        DailyWeather(dailyWeather!!)
-        Indices(indices!!)
+        if (nowWeather != null && dailyWeather != null && indices != null) {
+            NowWeather(nowWeather, locationName)
+            DailyWeather(dailyWeather)
+            Indices(indices)
+        } else {
+            Text(text = "获取天气信息失败")
+        }
     }
 }
 
@@ -77,7 +87,7 @@ fun WeatherScreenPreview() {
                 .wrapContentHeight()
                 .verticalScroll(rememberScrollState())
         ) {
-            NowWeather(nowWeather)
+            NowWeather(nowWeather, "北京")
             DailyWeather(dailyWeather)
             Indices(indices)
         }

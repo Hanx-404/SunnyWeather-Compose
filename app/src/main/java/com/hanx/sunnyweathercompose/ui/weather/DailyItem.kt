@@ -17,6 +17,8 @@ import com.hanx.sunnyweathercompose.logic.model.Daily
 import com.hanx.sunnyweathercompose.logic.model.getSky
 import com.hanx.sunnyweathercompose.ui.theme.Purple40
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun DailyItem(daily: Daily) {
@@ -28,8 +30,11 @@ fun DailyItem(daily: Daily) {
             .wrapContentHeight()
             .padding(15.dp)
     ) {
+        val date = LocalDate.parse(daily.fxDate)
+        val dateFormatter = DateTimeFormatter.ofPattern("MM月dd日")
+        val formattedDate = date.format(dateFormatter)
         Text(
-            text = daily.fxDate,
+            text = formattedDate,
             modifier = Modifier.wrapContentHeight()
         )
         Icon(

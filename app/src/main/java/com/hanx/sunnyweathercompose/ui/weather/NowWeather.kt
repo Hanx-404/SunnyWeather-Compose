@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +24,7 @@ import com.hanx.sunnyweathercompose.logic.model.getSky
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
 @Composable
-fun NowWeather(now: Now) {
+fun NowWeather(now: Now, locationName: String) {
     Box(modifier = Modifier.fillMaxWidth().height(530.dp)) {
         Image(
             painter = painterResource(getSky(now.icon).bgResId),
@@ -32,7 +33,7 @@ fun NowWeather(now: Now) {
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().wrapContentHeight()
+            modifier = Modifier.fillMaxSize()
         ) {
             Box(
                 modifier = Modifier
@@ -40,8 +41,9 @@ fun NowWeather(now: Now) {
                     .height(70.dp)
             ) {
                 Text(
-                    text = "城市名",
+                    text = locationName,
                     fontSize = 22.sp,
+                    color = Color.White,
                     modifier = Modifier
                         .wrapContentSize()
                         .padding(start = 60.dp, end = 60.dp)
@@ -56,6 +58,7 @@ fun NowWeather(now: Now) {
                 Text(
                     text = "${now.temp}℃",
                     fontSize = 70.sp,
+                    color = Color.White,
                     modifier = Modifier.wrapContentSize()
                 )
                 Column(
@@ -67,6 +70,7 @@ fun NowWeather(now: Now) {
                     Text(
                         text = "${now.text} | 体感 ${now.feelsLike}℃",
                         fontSize = 18.sp,
+                        color = Color.White,
                         modifier = Modifier.wrapContentSize()
                     )
                 }
@@ -88,7 +92,8 @@ fun NowWeatherPreview() {
                 "北风",
                 "3",
                 "40"
-            )
+            ),
+            "北京"
         )
     }
 }
