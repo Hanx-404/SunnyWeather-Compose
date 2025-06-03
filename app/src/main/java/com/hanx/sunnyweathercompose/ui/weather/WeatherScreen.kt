@@ -15,4 +15,6 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()) {
     val weatherLiveData by remember { _weatherLiveData }
 
     val nowWeather = weatherLiveData?.getOrNull()?.now
+    val dailyWeather = weatherLiveData?.getOrNull()?.daily
+    val indices = weatherLiveData?.getOrNull()?.indicesDaily
 }

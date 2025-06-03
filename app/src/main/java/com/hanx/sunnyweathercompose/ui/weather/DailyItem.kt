@@ -1,6 +1,5 @@
 package com.hanx.sunnyweathercompose.ui.weather
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hanx.sunnyweathercompose.R
 import com.hanx.sunnyweathercompose.logic.model.Daily
+import com.hanx.sunnyweathercompose.logic.model.getSkycon
+import com.hanx.sunnyweathercompose.ui.theme.Purple40
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
 @Composable
@@ -28,17 +28,15 @@ fun DailyItem(daily: Daily) {
             .wrapContentHeight()
             .padding(15.dp)
     ) {
-        // val context = SunnyWeatherApplication.context
-        // val resourceName = "ic_skycon_${daily.iconDay}"
-        // val skyconResId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
         Text(
             text = daily.fxDate,
             modifier = Modifier.wrapContentHeight()
         )
         Icon(
             // painter = painterResource(skyconResId),
-            painter = painterResource(R.drawable.ic_skycon_100_fill),
-            contentDescription = "天气图标"
+            painter = painterResource(getSkycon(daily.iconDay)),
+            contentDescription = "天气图标",
+            tint = Purple40
         )
         Text(
             text = daily.textDay,
@@ -51,22 +49,6 @@ fun DailyItem(daily: Daily) {
     }
 }
 
-// @Composable
-// fun Skycon(
-//     icon: String,
-//     modifier: Modifier = Modifier,
-//     fontSize: TextUnit = 24.sp,
-//     color: Color = Color.Black
-// ) {
-//     Text(
-//         text = icon,
-//         fontFamily = QWeatherIconFamily,
-//         fontSize = fontSize,
-//         color = color,
-//         modifier = modifier
-//     )
-// }
-
 @Preview(showBackground = true)
 @Composable
 fun DailyItemPreview() {
@@ -76,10 +58,10 @@ fun DailyItemPreview() {
                 fxDate = "2023-03-01",
                 tempMax = "10",
                 tempMin = "5",
-                iconDay = "100",
-                textDay = "晴",
+                iconDay = "101",
+                textDay = "多云",
                 iconNight = "100",
-                textNight = "晴",
+                textNight = "多云",
                 humidity = "50"
             )
         )
