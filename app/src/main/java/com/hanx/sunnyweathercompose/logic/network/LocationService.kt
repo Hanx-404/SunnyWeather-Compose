@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface LocationService {
 
-    @GET("geo/v2/city/lookup?key=${SunnyWeatherApplication.TOKEN}")
+    @GET("geo/v2/city/lookup?range=cn&key=${SunnyWeatherApplication.TOKEN}")
     fun searchLocation(@Query("location") location: String): Call<LocationResponse>
 }
