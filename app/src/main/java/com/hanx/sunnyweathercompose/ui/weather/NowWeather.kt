@@ -32,7 +32,7 @@ fun NowWeather(now: Now) {
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxWidth().wrapContentHeight()
         ) {
             Box(
                 modifier = Modifier
