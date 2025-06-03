@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hanx.sunnyweathercompose.logic.model.Daily
-import com.hanx.sunnyweathercompose.logic.model.getSkycon
+import com.hanx.sunnyweathercompose.logic.model.getSky
 import com.hanx.sunnyweathercompose.ui.theme.Purple40
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
@@ -33,8 +33,7 @@ fun DailyItem(daily: Daily) {
             modifier = Modifier.wrapContentHeight()
         )
         Icon(
-            // painter = painterResource(skyconResId),
-            painter = painterResource(getSkycon(daily.iconDay)),
+            painter = painterResource(getSky(daily.iconDay).iconResId),
             contentDescription = "天气图标",
             tint = Purple40
         )

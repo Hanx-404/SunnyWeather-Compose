@@ -22,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hanx.sunnyweathercompose.R
 import com.hanx.sunnyweathercompose.SunnyWeatherApplication
 import com.hanx.sunnyweathercompose.logic.model.IndicesDaily
 
