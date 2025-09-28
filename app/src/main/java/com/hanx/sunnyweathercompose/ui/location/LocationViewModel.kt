@@ -19,4 +19,10 @@ class LocationViewModel : ViewModel() {
     fun searchLocations(location: String) {
         searchLiveData.value = location
     }
+
+    fun saveLocation(location: Location) = Repository.saveLocation(location)
+
+    fun getSavedLocation() = Repository.getSavedLocation()
+
+    fun isLocationSaved() = Repository.isLocationSaved()
 }

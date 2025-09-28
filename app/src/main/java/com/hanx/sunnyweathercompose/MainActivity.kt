@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.hanx.sunnyweathercompose.ui.location.LocationViewModel
 import com.hanx.sunnyweathercompose.ui.location.LocationsScreen
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 import com.hanx.sunnyweathercompose.ui.weather.WeatherScreen
@@ -27,9 +28,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation(weatherViewModel: WeatherViewModel = viewModel()) {
+fun AppNavigation(weatherViewModel: WeatherViewModel = viewModel(), locationViewModel: LocationViewModel = viewModel()) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "locations") {
+    val startDest = if (locationViewModel.isLocationSaved()) {
+        "weather/${locationViewModel.getSavedLocation().id}/${locationViewModel.getSavedLocation().name}"
+    } else {
+        "locations"
+    }
+    NavHost(navController = navController, startDestination = startDest) {
         composable("locations") {
             LocationsScreen(navController)
         }

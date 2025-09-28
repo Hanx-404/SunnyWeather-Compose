@@ -20,14 +20,14 @@ import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 @Composable
 fun LocationItem(
     location: Location,
-    onclick: () -> Unit = {}
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .padding(18.dp)
             .fillMaxWidth()
             .height(120.dp)
-            .clickable { onclick() }
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier

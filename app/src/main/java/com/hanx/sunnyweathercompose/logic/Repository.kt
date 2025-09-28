@@ -1,6 +1,7 @@
 package com.hanx.sunnyweathercompose.logic
 
 import androidx.lifecycle.liveData
+import com.hanx.sunnyweathercompose.logic.dao.LocationDao
 import com.hanx.sunnyweathercompose.logic.model.Location
 import com.hanx.sunnyweathercompose.logic.model.Weather
 import com.hanx.sunnyweathercompose.logic.network.SunnyWeatherNetwork
@@ -50,6 +51,12 @@ object Repository {
             }
         }
     }
+
+    fun saveLocation(location: Location) = LocationDao.saveLocation(location)
+
+    fun getSavedLocation() = LocationDao.getSavedLocation()
+
+    fun isLocationSaved() = LocationDao.isLocationSaved()
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>) =
         liveData<Result<T>>(context) {

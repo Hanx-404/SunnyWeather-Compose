@@ -36,14 +36,15 @@ fun LocationsScreen(
     navController: NavController? = null,
     locationViewModel: LocationViewModel = viewModel()
 ) {
-    // val locationList = locationViewModel.locationLiveData.observeAsState()
     val locationLiveData = locationViewModel.locationLiveData.observeAsState()
     val locationList by remember { locationLiveData }
     var inputLocation by remember { mutableStateOf("") }
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .safeDrawingPadding()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding()
+    ) {
         Image(
             painter = painterResource(id = R.drawable.bg_place),
             contentDescription = "background image",
@@ -77,7 +78,7 @@ fun LocationsScreen(
                         .padding(horizontal = 10.dp, vertical = 10.dp)
                 )
             }
-            LocationResults(locationList, navController!!)
+            LocationResults(locationList, locationViewModel, navController!!)
         }
     }
 }
@@ -95,7 +96,11 @@ fun SearchBar(value: String, onValueChange: (String) -> Unit, modifier: Modifier
 }
 
 @Composable
-fun LocationResults(locationList: Result<List<Location>>?, navController: NavController) {
+fun LocationResults(
+    locationList: Result<List<Location>>?,
+    locationViewModel: LocationViewModel,
+    navController: NavController
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -104,7 +109,10 @@ fun LocationResults(locationList: Result<List<Location>>?, navController: NavCon
             items(it) { item ->
                 LocationItem(
                     location = item,
-                    onclick = { navController.navigate("weather/${item.id}/${item.name}") })
+                    onClick = {
+                        locationViewModel.saveLocation(item)    // 记录所选城市
+                        navController.navigate("weather/${item.id}/${item.name}")
+                    })
             }
         }
     }

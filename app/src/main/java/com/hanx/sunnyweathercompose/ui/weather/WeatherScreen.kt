@@ -1,6 +1,7 @@
 package com.hanx.sunnyweathercompose.ui.weather
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -18,10 +19,16 @@ import androidx.navigation.NavController
 import com.hanx.sunnyweathercompose.logic.model.Daily
 import com.hanx.sunnyweathercompose.logic.model.IndicesDaily
 import com.hanx.sunnyweathercompose.logic.model.Now
+import com.hanx.sunnyweathercompose.ui.location.LocationViewModel
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
 @Composable
-fun WeatherScreen(locationId: String? = null, locationName: String = "城市名", navController: NavController? = null, weatherViewModel: WeatherViewModel = viewModel()) {
+fun WeatherScreen(
+    locationId: String? = null,
+    locationName: String = "城市名",
+    navController: NavController,
+    weatherViewModel: WeatherViewModel = viewModel()
+) {
     locationId?.let {
         weatherViewModel.refreshWeather(it)
     }
@@ -35,13 +42,14 @@ fun WeatherScreen(locationId: String? = null, locationName: String = "城市名"
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .fillMaxSize()
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
     ) {
         if (nowWeather != null && dailyWeather != null && indices != null) {
-            NowWeather(nowWeather, locationName)
+            NowWeather(nowWeather, locationName) {
+                navController.navigate("locations")
+            }
             DailyWeather(dailyWeather)
             Indices(indices)
         } else {
@@ -87,7 +95,7 @@ fun WeatherScreenPreview() {
                 .wrapContentHeight()
                 .verticalScroll(rememberScrollState())
         ) {
-            NowWeather(nowWeather, "北京")
+            NowWeather(nowWeather, "北京") {}
             DailyWeather(dailyWeather)
             Indices(indices)
         }
