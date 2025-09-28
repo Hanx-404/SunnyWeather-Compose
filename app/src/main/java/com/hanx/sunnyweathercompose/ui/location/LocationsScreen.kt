@@ -111,7 +111,9 @@ fun LocationResults(
                     location = item,
                     onClick = {
                         locationViewModel.saveLocation(item)    // 记录所选城市
-                        navController.navigate("weather/${item.id}/${item.name}")
+                        navController.navigate("weather/${item.id}/${item.name}") {
+                            popUpTo("weather/${item.id}/${item.name}") { inclusive = true }
+                        }
                     })
             }
         }

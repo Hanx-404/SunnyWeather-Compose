@@ -19,7 +19,6 @@ import androidx.navigation.NavController
 import com.hanx.sunnyweathercompose.logic.model.Daily
 import com.hanx.sunnyweathercompose.logic.model.IndicesDaily
 import com.hanx.sunnyweathercompose.logic.model.Now
-import com.hanx.sunnyweathercompose.ui.location.LocationViewModel
 import com.hanx.sunnyweathercompose.ui.theme.SunnyWeatherTheme
 
 @Composable

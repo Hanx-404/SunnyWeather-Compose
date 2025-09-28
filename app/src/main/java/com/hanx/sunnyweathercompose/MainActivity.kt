@@ -43,7 +43,6 @@ fun AppNavigation(weatherViewModel: WeatherViewModel = viewModel(), locationView
             val locationId = backStackEntry.arguments?.getString("locationId")
             val locationName = backStackEntry.arguments?.getString("locationName")
             if (locationId != null && locationName != null) {
-                // weatherViewModel.refreshWeather(locationId)
                 WeatherScreen(locationId, locationName, navController)
             }
         }
